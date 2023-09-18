@@ -9,5 +9,9 @@ library(tidyverse)
 # Importing Data
 paris_quad <- read_csv(file = "./original data/data_2022_2023.csv")
 
+tokyo_quad <- read_csv(file = "./original data/data_2017_2021.csv")
 
 glimpse(paris_quad)
+
+paris_quad |> 
+  group_by()
