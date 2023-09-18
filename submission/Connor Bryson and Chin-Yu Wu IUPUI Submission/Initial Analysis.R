@@ -7,6 +7,7 @@ setwd("C:/Users/cdbry/Desktop/Sports Analytics/Competitions/2024 Uconn Data Chal
 library(tidyverse)
 
 # Importing Data
-paris_quad <- read_csv(file = "/original data/data_2022_2023.csv")
+paris_quad <- read_csv(file = "./original data/data_2022_2023.csv")
 
-?read_csv
+
+glimpse(paris_quad)
