@@ -23,7 +23,6 @@ ANDRADE,Rebeca,w,BRA,1-Aug-21,Olympic Games,final,"Tokyo, Japan",FX,5,5.9,8.233,
 ANDRADE,Rebeca,w,BRA,29-Jul-21,Olympic Games,final,"Tokyo, Japan",UE,5,6.3,8.366,,14.666
 ANDRADE,Rebeca,w,BRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,19,6,8.2,,14.2
 ANDRADE,Rebeca,w,BRA,29-Jul-21,Olympic Games,final,"Tokyo, Japan",VT,1,6,9.4,0.1,15.3
-ANDRADE,Rebeca,w,BRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT,1,6,9.4,,15.4
 ANDRADE,Rebeca,w,BRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT1,3,6,9.4,,15.4
 ANDRADE,Rebeca,w,BRA,1-Aug-21,Olympic Games,final,"Tokyo, Japan",VT1,1,6,9.266,0.1,15.166
 ANDRADE,Rebeca,w,BRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT2,3,5.4,9.4,,14.8
@@ -47,7 +46,6 @@ BLACK,Elsabeth,w,CAN,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,6,6.3,7.8,,1
 BLACK,Elsabeth,w,CAN,1-Aug-21,Olympic Games,final,"Tokyo, Japan",BB,4,6.2,7.666,,13.86
 BLACK,Elsabeth,w,CAN,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,63,5.3,6.966,,12.266
 BLACK,Elsabeth,w,CAN,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,54,5.7,7.1,,12.8
-BLACK,Elsabeth,w,CAN,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT,13,5.4,9.133,,14.533
 BLACK,Elsabeth,w,CAN,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT1,12,5.4,9.133,,14.533
 BLACK,Elsabeth,w,CAN,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT2,12,5.2,9.1,,14.3
 BOYER,Marine,w,FRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,22,5.8,7.666,,13.466
@@ -65,7 +63,7 @@ BUI,Kim,w,GER,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,24,5.3,7.9,,13.2
 BUI,Kim,w,GER,29-Jul-21,Olympic Games,final,"Tokyo, Japan",UE,11,5.7,8.066,,13.766
 BUI,Kim,w,GER,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,24,5.9,8.166,,14.066
 BUI,Kim,w,GER,29-Jul-21,Olympic Games,final,"Tokyo, Japan",VT,21,4.6,8.866,,13.466
-BUI,Kim,w,GER,SUN 25 JUL 2021,Olympic Games,qual,"Tokyo, Japan",VT,54,4.6,8.866,,13.466
+BUI,Kim,w,GER,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT,54,4.6,8.866,,13.466
 CALLUM,Mc Grace,w,USA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,32,5.2,7.866,,13.066
 CALLUM,Mc Grace,w,USA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,16,5.6,7.966,0.1,13.466
 CALLUM,Mc Grace,w,USA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,22,5.8,8.3,,14.1
@@ -113,7 +111,6 @@ D'AMATO,Asia,w,ITA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT,32,5.4,8.833,,
 DARIES,Naveen,w,RSA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,90,4.8,4.133,,8.933
 DARIES,Naveen,w,RSA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,90,4.8,4.133,,8.9
 DARIES,Naveen,w,RSA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,77,4.5,7.566,0.3,11.766
-DARIES,Naveen,w,RSA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,77,4.5,7.566,0.3,11.766
 DARIES,Naveen,w,RSA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,62,5,7.366,,12.366
 DARIES,Naveen,w,RSA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT,66,4.6,8.7,,13.3
 DARIES,Naveen,w,RSA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT1,18,4.6,8.7,,13.3
@@ -142,7 +139,6 @@ FAN,Yilin,w,CHN,1-Aug-21,Olympic Games,final,"Tokyo, Japan",UE,7,6.4,7.5,,13.9
 FERRARI,Vanessa,w,ITA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,52,5.1,7.4,,12.5
 FERRARI,Vanessa,w,ITA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,1,5.9,8.266,,14.166
 FERRARI,Vanessa,w,ITA,1-Aug-21,Olympic Games,final,"Tokyo, Japan",FX,2,5.9,8.3,,14.2
-FERRARI,Vanessa,w,ITA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,,,,,
 FRANCIS,Danusia,w,JAM,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,88,0.5,9.033,6.5,3
 FRIESS,Aline,w,FRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,51,4.7,7.8,,12.5
 FRIESS,Aline,w,FRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,56,4.8,8,0.3,12.5
@@ -211,7 +207,6 @@ HOLBURA,Maria,w,ROU,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,65,4.9,7.3,,1
 HOLBURA,Maria,w,ROU,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,80,4.9,6.2,,11.1
 HOLBURA,Maria,w,ROU,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT,72,4.6,8.566,,13.166
 ILIANKOVA,Anastasiia,w,ROC,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,91,3.8,4.483,,
-ILIANKOVA,Anastasiia,w,ROC,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,,,,,
 ILIANKOVA,Anastasiia,w,ROC,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,3,6.4,8.566,,14.966
 ILIANKOVA,Anastasiia,w,ROC,1-Aug-21,Olympic Games,final,"Tokyo, Japan",UE,2,6.3,8.533,,14.83
 IORDACHE,Larisa Andreea,w,ROU,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,4,6.2,7.933,,14.133
@@ -358,7 +353,6 @@ ORREGO,Ariana,w,PER,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,68,4.9,7.466,
 ORREGO,Ariana,w,PER,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,85,4.4,5.066,,9.4
 ORREGO,Ariana,w,PER,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT,59,4.6,8.833,,13.433
 OU,Yushan,w,CHN,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,11,5.9,8.033,,13.933
-OU,Yushan,w,CHN,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,,,,,
 OU,Yushan,w,CHN,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,35,5.7,7.8,,13.5
 PETISCO,Alba,w,ESP,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,73,5,6.7,,11.7
 PETISCO,Alba,w,ESP,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,53,5.1,7.466,,12.566
@@ -396,7 +390,6 @@ RYAN,Megan,w,IRL,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",VT,69,4.6,8.6,,13.2
 SARAIVA,Flavia,w,BRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,9,5.9,8.066,,13.966
 SARAIVA,Flavia,w,BRA,1-Aug-21,Olympic Games,final,"Tokyo, Japan",BB,7,5.7,7.433,,13.13
 SARAIVA,Flavia,w,BRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,69,5.3,6.766,0.3,12.066
-SARAIVA,Flavia,w,BRA,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,,,,,
 SASNAL,Gabriela,w,POL,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",BB,54,4.6,7.833,,12.433
 SASNAL,Gabriela,w,POL,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",FX,73,4.3,7.633,0.3,11.933
 SASNAL,Gabriela,w,POL,25-Jul-21,Olympic Games,qual,"Tokyo, Japan",UE,48,5.2,7.766,,12.966
