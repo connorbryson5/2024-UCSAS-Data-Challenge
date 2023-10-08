@@ -17,20 +17,23 @@ tokyo_quad <- read.csv(file = "./original data/data_2017_2021.csv", header = TRU
 ```{r}
 tokyo_quad %>%
   ggplot()+
-  geom_boxplot(mapping = aes(x = Score, y = Apparatus))
+  geom_boxplot(mapping = aes(x = Score, y = Apparatus))+
+  theme_hc()
 ```
 
 ```{r}
 tokyo_quad %>%
   ggplot()+
-  geom_boxplot(mapping = aes(x = D_Score, y = Apparatus))
+  geom_boxplot(mapping = aes(x = D_Score, y = Apparatus))+
+  theme_hc()
 
 ```
 
 ```{r}
 tokyo_quad %>%
   ggplot()+
-  geom_boxplot(mapping = aes(x = E_Score, y = Apparatus))
+  geom_boxplot(mapping = aes(x = E_Score, y = Apparatus))+
+  theme_hc()
 
 ```
 
