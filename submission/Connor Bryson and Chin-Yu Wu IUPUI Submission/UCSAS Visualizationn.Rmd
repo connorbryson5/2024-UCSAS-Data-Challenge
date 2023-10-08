@@ -1,0 +1,78 @@
+---
+title: "UCSAS Visualization"
+author: "Chin-yu"
+date: "2023-10-01"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dbplyr)
+library(ggthemes)
+library(ggrepel)
+tokyo_quad <- read.csv(file = "./original data/data_2017_2021.csv", header = TRUE)
+```
+
+```{r}
+tokyo_quad %>%
+  ggplot()+
+  geom_boxplot(mapping = aes(x = Score, y = Apparatus))+
+  theme_hc()
+```
+
+```{r}
+tokyo_quad %>%
+  ggplot()+
+  geom_boxplot(mapping = aes(x = D_Score, y = Apparatus))+
+  theme_hc()
+
+```
+
+```{r}
+tokyo_quad %>%
+  ggplot()+
+  geom_boxplot(mapping = aes(x = E_Score, y = Apparatus))+
+  theme_hc()
+
+```
+
+```{r}
+champion_round_point <- tokyo_quad %>%
+  filter(Round == "qual") %>%
+  filter(Rank <= 15)
+
+champion_round_point %>%
+  ggplot()+
+  geom_boxplot(mapping = aes(x = Score, y = Apparatus))+
+  geom_text_repel(data = filter(champion_round_point, Rank == 1), 
+                  mapping = aes(x = Score, y = Apparatus, label = LastName),
+                  color = "darkred")+
+  theme_hc()
+```
+
+```{r}
+champion_round_point %>%
+  ggplot()+
+  geom_boxplot(mapping = aes(x = D_Score, y = Apparatus))+
+  geom_text_repel(data = filter(champion_round_point, Rank == 1), 
+                  mapping = aes(x = D_Score, y = Apparatus, label = LastName),
+                  color = "darkred")+
+  theme_hc()
+
+```
+```{r}
+percentiles <- c(quantile(champion_round_point$Rank, 0.01),
+                 quantile(champion_round_point$Rank, 0.99))
+
+champion_round_point %>%
+  ggplot()+
+  geom_boxplot(mapping = aes(x = E_Score, y = Apparatus))+
+  geom_text_repel(data = filter(champion_round_point, Rank == 1), 
+                  mapping = aes(x = E_Score, y = Apparatus, label = LastName),
+                  color = "darkred")+
+  theme_hc()
+
+```
+
+
