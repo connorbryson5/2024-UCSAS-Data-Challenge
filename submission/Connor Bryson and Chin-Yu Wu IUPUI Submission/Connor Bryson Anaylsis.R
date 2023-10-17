@@ -79,6 +79,8 @@ men_qual <- men |>
 
 unique(men$Round)
 
+men_by_player <- men |> 
+  arrange(Competition, Country, Apparatus, LastName, FirstName, )
 
 
 
