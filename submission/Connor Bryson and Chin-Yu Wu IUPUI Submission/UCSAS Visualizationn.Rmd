@@ -11,8 +11,12 @@ library(ggplot2)
 library(dbplyr)
 library(ggthemes)
 library(ggrepel)
+install.packages("stargazer")
+library(stargazer)
 tokyo_quad <- read.csv(file = "./original data/data_2017_2021.csv", header = TRUE)
 ```
+
+# 9/30
 
 ```{r}
 tokyo_quad %>%
@@ -61,6 +65,7 @@ champion_round_point %>%
   theme_hc()
 
 ```
+
 ```{r}
 percentiles <- c(quantile(champion_round_point$Rank, 0.01),
                  quantile(champion_round_point$Rank, 0.99))
@@ -75,4 +80,161 @@ champion_round_point %>%
 
 ```
 
+# 10/7
 
+```{r}
+women <- read.csv(file = "./original data/women_2022_2023.csv", header = TRUE)
+women_clean <- women[ , !names(women) %in% c("X")]
+all_women <- rbind(tokyo_quad, women_clean)
+```
+
+```{r}
+by_VT <- all_women %>%
+  filter(Apparatus == "VT1" | Apparatus == "VT2" | Apparatus == "VT") 
+by_VT <- by_VT %>%
+  filter(Score != 0.000)
+  
+by_FX <- all_women %>%
+  filter(Apparatus == "FX")
+by_FX <- by_FX %>%
+  filter(Score != 0.000)
+
+by_UB <- all_women %>%
+  filter(Apparatus == "UB")
+by_UB <- by_UB %>%
+  filter(Score != 0.000)
+
+by_BB <- all_women %>%
+  filter(Apparatus == "BB")
+by_BB <- by_BB %>%
+  filter(Score != 0.000)
+
+```
+
+## Graph
+
+```{r}
+by_VT %>%
+  ggplot()+
+  geom_point(mapping = aes(x = Rank, y = D_Score))+
+  geom_smooth(mapping = aes(x = Rank, y = D_Score), method = lm)+
+  theme_minimal()
+
+```
+
+```{r}
+by_VT %>%
+  ggplot()+
+  geom_point(mapping = aes(x = Rank, y = E_Score))+
+  geom_smooth(mapping = aes(x = Rank, y = E_Score), method = lm)+
+  theme_minimal()
+```
+
+```{r}
+by_BB %>%
+  ggplot()+
+  geom_point(mapping = aes(x = Rank, y = D_Score))+
+  geom_smooth(mapping = aes(x = Rank, y = D_Score), method = lm)+
+  theme_minimal()
+```
+
+```{r}
+by_BB %>%
+  ggplot()+
+  geom_point(mapping = aes(x = Rank, y = E_Score))+
+  geom_smooth(mapping = aes(x = Rank, y = E_Score), method = lm)+
+  theme_minimal()
+```
+
+```{r}
+by_FX %>%
+  ggplot()+
+  geom_point(mapping = aes(x = Rank, y = D_Score))+
+  geom_smooth(mapping = aes(x = Rank, y = D_Score), method = lm)+
+  theme_minimal()
+```
+
+```{r}
+by_FX %>%
+  ggplot()+
+  geom_point(mapping = aes(x = Rank, y = E_Score))+
+  geom_smooth(mapping = aes(x = Rank, y = E_Score), method = lm)+
+  theme_minimal()
+```
+
+```{r}
+by_UB %>%
+  ggplot()+
+  geom_point(mapping = aes(x = Rank, y = D_Score))+
+  geom_smooth(mapping = aes(x = Rank, y = D_Score), method = lm)+
+  theme_minimal()
+```
+
+```{r}
+by_BB %>%
+  ggplot()+
+  geom_point(mapping = aes(x = Rank, y = E_Score))+
+  geom_smooth(mapping = aes(x = Rank, y = E_Score), method = lm)+
+  theme_minimal()
+```
+
+## Regression
+
+```{r}
+regression_VT_D_Score <- lm(D_Score ~ Rank, data = by_VT)
+summary(regression_VT_D_Score)
+```
+
+```{r}
+regression_VT_E_Score <- lm(E_Score ~ Rank, data = by_VT)
+summary(regression_VT_E_Score)
+```
+
+```{r}
+regression_BB_D_Score <- lm(D_Score ~ Rank, data = by_BB)
+summary(regression_BB_D_Score)
+```
+
+```{r}
+regression_BB_E_Score <- lm(E_Score ~ Rank, data = by_BB)
+summary(regression_BB_E_Score)
+```
+
+```{r}
+regression_FX_D_Score <- lm(D_Score ~ Rank, data = by_FX)
+summary(regression_FX_D_Score)
+```
+
+```{r}
+regression_FX_E_Score <- lm(E_Score ~ Rank, data = by_FX)
+summary(regression_FX_E_Score)
+```
+
+```{r}
+regression_UB_D_Score <- lm(D_Score ~ Rank, data = by_UB)
+summary(regression_UB_D_Score)
+```
+
+```{r}
+regression_UB_E_Score <- lm(E_Score ~ Rank, data = by_UB)
+summary(regression_UB_E_Score)
+```
+
+## After filter
+
+```{r}
+by_VT_Olympics_qualification <- by_VT %>%
+  filter(Round == "qual" & Competition == "Olympic Games")
+regression_VT_D_Score_olympics <- lm(D_Score ~ Rank, data = by_VT_Olympics_qualification)
+stargazer(regression_VT_D_Score_olympics, type = "text")
+```
+
+```{r}
+regression_VT_E_Score_olympics <- lm(E_Score ~ Rank, data = by_VT_Olympics_qualification)
+stargazer(regression_VT_E_Score_olympics, type = "text")
+```
+
+```{r}
+by_BB_Olympics_qualification <- by_BB %>%
+  filter(Round == "qual" & Competition == "Olympic Games")
+```
