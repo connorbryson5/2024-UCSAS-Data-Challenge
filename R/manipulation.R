@@ -3,7 +3,7 @@ source("function.R")
 
 ### 2023 Central American and Caribbean Games San Salvador ################
 
-ca_path <- "../pdfs_2023/central_am"
+ca_path <- "../pdf/central_am"
 col_names_vt <- c("Rank", "Bib", "Name", "NOC", "vault", "E_Score","D_Score", 
                   "Penalty", "Score")
 
@@ -19,7 +19,7 @@ write_csv(ca_tb, "../cleandata/data_new/central_america.csv")
 
 ### 2022 Senior European Championships MUNICH (GER) ############################
 
-eu22_path <- "../pdfs_2023/europe_22"
+eu22_path <- "../pdf/europe_22"
 col_names_vt <- c("Rank", "Bib", "Name", "NOC", "vault", "E_Score","D_Score", 
                   "Penalty", "Score")
 eu_ls_raw <- get_gym_tables(eu22_path) %>% 
@@ -42,7 +42,7 @@ write_csv(eu_tb, "../cleandata/data_new/european_2022.csv")
 
 ### 2023 Senior European Championships ANTALYA (TUR) ###########################
 
-eu23_path <- "../pdfs_2023/europe_23"
+eu23_path <- "../pdf/europe_23"
 col_names_vt <- c("Rank", "Bib", "Name", "NOC", "vault", "E_Score","D_Score", 
                   "Penalty", "Score")
 eu_ls_raw <- get_gym_tables(eu23_path) %>% 
@@ -59,8 +59,11 @@ write_csv(eu_tb, "../cleandata/data_new/european_2023.csv")
 
 
 ### 2023 Varna World Challenge Cup #############################################
+## Note: the get_gym_tables() function does not apply anymore after some 
+## changes of function code, any changes are made directly on clean data
+## the following paragraph of codes may not run.
 
-vn_path <- "../pdfs_2023/varna"
+vn_path <- "../pdf/varna"
 col_names_vt <- c("Rank", "Bib", "Name", "NOC", "vault", "D_Score","E_Score", 
                   "Penalty", "Score")
 vn_ls_raw <- get_gym_tables(vn_path)
@@ -86,13 +89,17 @@ vn_tb <- transform_table(table_list = vn_ls_n,
 write_csv(vn_tb, "../cleandata/data_new/varna.csv")
 
 
-### 2023 Varna World Challenge Cup Modification : Switch D_Score and E_Score####
+### 2023 Varna World Challenge Cup Modification 1: Switch D_Score and E_Score####
 vn_tb <- read_csv("../cleandata/data_new/varna.csv")
 vn_tb <- vn_tb %>% 
   mutate(D = E_Score, E_Score = D_Score, D_Score = D) %>% 
   select(!D)
 write_csv(vn_tb, "../cleandata/data_new/varna.csv")
 
+### 2023 Varna World Challenge Cup Modification 1: remove "Results" from competition name 
+vn_tb <- read_csv("../cleandata/data_new/varna.csv") %>% 
+  mutate(Competition = "2023 Varna World Challenge Cup")
+write_csv(vn_tb, "../cleandata/data_new/varna.csv")
 
 ### 2023 Tel Aviv Challenge Cup ################################################
 
@@ -105,6 +112,7 @@ full_name <- c("Australia", "Austria", "Azerbaijan", "Belgium", "Croatia",
                "Spain", "Finland", "France", "Great Britain", "Germany",
                "Hong Kong", "Hungary", "Israel", "South Africa", 
                "Slovenia", "Slovakia", "Türkiye")
+## result_df is used as an input value of get_web_tb() function
 result_df <- data.frame(Country_Abbr = country_abbr, Full_Name = full_name)
 
 tel_m <- get_web_tb(url1, gender = "m")
@@ -113,8 +121,9 @@ tel_tb_ls <- c(tel_m, tel_w) %>%
   update_vt()
 tel_tb <- transform_web_tb(table_list = tel_tb_ls, 
                            Date = "1-4 Jun 2023",
-                           Competition = "2023 Tel Aviv Challenge Cup",
-                           Location = "Tel Aviv, Israel") %>% 
+                           Competition = "2023 Tel Aviv World Challenge Cup",
+                           Location = "Tel Aviv, Israel",
+                           NOCkey = result_df) %>% 
   select(-Nation)
 write_csv(tel_tb, "../cleandata/data_new/telaviv.csv")
 
@@ -123,6 +132,14 @@ write_csv(tel_tb, "../cleandata/data_new/telaviv.csv")
 
 url_m <- "https://thegymter.net/2023/06/13/2023-osijek-challenge-cup-mens-results/"
 url_w <- "https://thegymter.net/2023/06/12/2023-osijek-challenge-cup-results/"
+
+## to replace full names in source data with abbreviations
+noc_key <- read.csv("noc_key.csv")
+new_rows <- data.frame(
+  Full_Name = c("Belarus*", "Norway", "Albania", "Armenia", "Czech Republic", "Great Britain", "Hong Kong", "Turkey", "South Korea", "Russia*"),
+  Country_Abbr = c("BLR", "NOR", "ALB", "ARM", "CZE", "GBR", "HKG", "TUR", "KOR", "RUS")
+)
+noc_data <- rbind(noc_key, new_rows)
 
 osi_m <- get_web_tb(url_m, gender = "m")
 osi_w <- get_web_tb(url_w, gender = "w")
@@ -138,8 +155,9 @@ osi_tb_ls <- c(osi_m, osi_w) %>%
 
 osi_tb <- transform_web_tb(table_list = osi_tb_ls, 
                            Date = "8-11 Jun 2023",
-                           Competition = "2023 Osijek Challenge Cup",
-                           Location = "Osijek, Croatia.") %>% 
+                           Competition = "2023 Osijek World Challenge Cup",
+                           Location = "Osijek, Croatia.",
+                           NOCkey = noc_data) %>% 
   select(-Nation)
 write_csv(osi_tb, "../cleandata/data_new/osijek.csv")
 
@@ -147,16 +165,16 @@ write_csv(osi_tb, "../cleandata/data_new/osijek.csv")
 ### 2023 Cottbus Apparatus World Cup ###########################################
 
 area <- list(c(147, 53, 739, 568))
-folder_path <- "../pdfs_2023/cottbus"
+folder_path <- "../pdf/cottbus"
 cottbus_tb_raw <- extract_data_cot(folder_path, area)
 cottbus_tb <- process_data_cot(cottbus_tb_raw, "Cottbus",
                                    Date = "23-26 Feb 2023", 
-                                   Competition = "FIG Apparatus World Cup 2023", 
+                                   Competition = "2023 Cottbus World Cup", 
                                    Location = "Cottbus, Germany")
 write_csv(cottbus_tb, "../cleandata/data_new/cottbus.csv")  
 
 ## EnBW DTB Pokal Team Challenge 2023
-folder_path <- "../pdfs_2023/dtb_pokal"
+folder_path <- "../pdf/dtb_pokal"
 dtb_tb_raw <- extract_data_cot(folder_path, area)
 ## used a different split name algorithm since names here contains German letters
 dtb_raw_name <- dtb_tb_raw %>% 
@@ -174,7 +192,7 @@ write_csv(dtb_tb, "../cleandata/data_new/dtb_pokal.csv")
 
 
 ### 2022 51st FIG Artistic Gymnastics World Championships ######################
-lvp_path <- "../pdfs_2023/liverpool" 
+lvp_path <- "../pdf/liverpool" 
 col_names_vt <- c("Rank", "Bib", "Name", "NOC", "vault", "D_Score","E_Score", 
                   "Penalty", "Score")
 lvp_ls_raw <- get_gym_tables(folder_path = lvp_path)
@@ -197,7 +215,7 @@ write_csv(lvp_tb, "../cleandata/data_new/liverpool_event.csv")
 
 
 ### CHENGDU 2023 FISU World University Games ###################################
-uni_path <- "../pdfs_2023/23univgames"
+uni_path <- "../pdf/23univgames"
 col_names_vt <- c("Rank", "Bib", "Name", "NOC", "vault", "D_Score","E_Score", 
                   "Penalty", "Score")
 
@@ -215,13 +233,13 @@ write_csv(uni_tb, "../cleandata/data_new/univgames_23.csv")
 ### BIRMINGHAM 2022 Commonwealth Games #########################################
 ## 和利物浦的51st FIG Artistic Gymnastics World Championships格式相同
 
-comm_path <- "../pdfs_2023/22commgames"
+comm_path <- "../pdf/22commgames"
 col_names_vt <- c("Rank", "Bib", "Name", "NOC", "vault", "D_Score","E_Score", 
                   "Penalty", "Score")
 comm_ls_raw <- get_gym_tables(folder_path = comm_path) %>% 
   unlist(recursive = F, use.names = TRUE)
 
-hb_path <- "../pdfs_2023/22comm_m_qual_HB/m_qual_HB.pdf"
+hb_path <- "../pdf/22comm_m_qual_HB/m_qual_HB.pdf"
 hb_area <- list(c(223.3226, 99.9136, 680.9744, 494.8661))
 comm_m_qual_hb <- extract_tables(hb_path, area = hb_area, guess = FALSE, 
                                  output = "matrix") %>% 
