@@ -11,8 +11,10 @@ library(ggplot2)
 library(dbplyr)
 library(ggthemes)
 library(ggrepel)
-install.packages("stargazer")
 library(stargazer)
+library(gridExtra)
+install.packages('corrplot')
+library(corrplot)
 tokyo_quad <- read.csv(file = "./original data/data_2017_2021.csv", header = TRUE)
 ```
 
@@ -100,7 +102,7 @@ by_FX <- by_FX %>%
   filter(Score != 0.000)
 
 by_UB <- all_women %>%
-  filter(Apparatus == "UB")
+  filter(Apparatus == "UB" | Apparatus == "UE")
 by_UB <- by_UB %>%
   filter(Score != 0.000)
 
@@ -225,6 +227,7 @@ summary(regression_UB_E_Score)
 ```{r}
 by_VT_Olympics_qualification <- by_VT %>%
   filter(Round == "qual" & Competition == "Olympic Games")
+
 regression_VT_D_Score_olympics <- lm(D_Score ~ Rank, data = by_VT_Olympics_qualification)
 stargazer(regression_VT_D_Score_olympics, type = "text")
 ```
@@ -237,4 +240,47 @@ stargazer(regression_VT_E_Score_olympics, type = "text")
 ```{r}
 by_BB_Olympics_qualification <- by_BB %>%
   filter(Round == "qual" & Competition == "Olympic Games")
+
+regression_BB_D_Score_olympics <- lm(D_Score ~ Rank, data = by_BB_Olympics_qualification)
+stargazer(regression_BB_D_Score_olympics, type = "text")
+```
+
+```{r}
+regression_BB_E_Score_olympics <- lm(E_Score ~ Rank, data = by_BB_Olympics_qualification)
+stargazer(regression_BB_E_Score_olympics, type = "text")
+```
+
+```{r}
+by_FX_Olympics_qualification <- by_FX %>%
+  filter(Round == "qual" & Competition == "Olympic Games")
+
+regression_FX_D_Score_olympics <- lm(D_Score ~ Rank, data = by_FX_Olympics_qualification)
+stargazer(regression_FX_D_Score_olympics, type = "text")
+```
+
+```{r}
+regression_FX_E_Score_olympics <- lm(E_Score ~ Rank, data = by_FX_Olympics_qualification)
+stargazer(regression_FX_E_Score_olympics, type = "text")
+```
+
+```{r}
+by_UB_Olympics_qualification <- by_UB %>%
+  filter(Round == "qual" & Competition == "Olympic Games")
+
+regression_UB_D_Score_olympics <- lm(D_Score ~ Rank, data = by_UB_Olympics_qualification)
+stargazer(regression_UB_D_Score_olympics, type = "text")
+```
+
+```{r}
+regression_UB_E_Score_olympics <- lm(Rank ~ E_Score , data = by_UB_Olympics_qualification)
+stargazer(regression_UB_E_Score_olympics, type = "text")
+```
+
+```{r}
+gd <- tokyo_quad %>%
+  filter(Round == 'qual' & Competition == "Olympic Games")
+gdShort <- gd[9:14]
+forcorrplot <- cor(gdShort)
+corrplot(forcorrplot)
+cor(gdShort)
 ```
