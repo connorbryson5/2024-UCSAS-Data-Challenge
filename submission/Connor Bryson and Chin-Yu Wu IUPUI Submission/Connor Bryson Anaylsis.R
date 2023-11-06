@@ -29,6 +29,19 @@ dat <- dat |>
   filter(!is.na(Score))
 
 
+# Removing Duplicate Rows
+dat <- dat |> distinct()
+
+
+# Renaming Round names
+
+dat <- dat |> 
+  mutate(Round = case_when(
+    Round == "AAfinal" ~ "final_AA",
+    Round == "TeamFinal" ~ "final_Team",
+    Round == "AAqual" ~ "qual_AA",
+    TRUE ~ Round
+  ))
 
 
 
@@ -40,6 +53,133 @@ women <- dat |>
 
 men <- dat |> 
   filter(Gender == "m")   
+
+
+# Arranging by Apparartus and Round 
+# Finding out which players competed in all around final and which didn't.
+
+women <- women |> 
+  arrange(Competition, Country, FirstName, LastName, Apparatus, desc(Round)) 
+
+
+
+women_vt_app <- women |> 
+  filter(Apparatus %in% c("VT", "VT1", "VT2")) |> 
+  mutate(
+    Apparatus = case_when(
+      Apparatus == "VT1" &
+        lead(Apparatus) %in% c("VT", "VT1", "BB", "FX", "UB") ~ "VT",
+      TRUE ~ Apparatus
+    )
+  )
+
+
+
+
+
+
+# Women -------------------------------------------------------------------
+
+
+unique(women$Apparatus)
+
+unique(women$Competition)
+
+women <- women |> 
+  mutate(
+    Apparatus = case_when(
+      FirstName == lead(FirstName) &
+        LastName == lead(LastName) &
+        Competition == lead(Competition) &
+        Apparatus == "VT1" &
+        lead(Apparatus) %in% c("VT", "VT1") ~ "VT",
+      TRUE ~ Apparatus
+    )
+  )
+
+
+
+for (i in unique(women$Competition)){
+  comp <- women |> filter(Competition == i)
+  cat(i,"\n" , unique(comp$Round), "\n", unique(comp$Apparatus), "\n\n")
+}
+
+# 
+
+women |> 
+  ggplot(aes(x = Apparatus, y = Score))+
+  geom_boxplot()
+  
+
+
+
+
+
+
+
+# Breakdown by Round
+
+
+
+
+
+
+
+
+
+# VT Qual and VT Final are Separate
+
+
+
+
+
+women <- women |> 
+  mutate(
+    Apparatus = case_when(
+      FirstName == lead(FirstName) &
+      LastName == lead(LastName) &
+      Competition == lead(Competition) &
+      Apparatus == "VT1" &
+      lead(Apparatus) %in% c("VT", "VT1") ~ "VT",
+      TRUE ~ Apparatus
+    )
+  )
+
+
+
+
+
+
+
+#Athletes who were going for the individual apparatus final
+women_vt_qual <- women_qual |> 
+  filter(Apparatus %in% c("VT", "VT1", "VT2")) |> 
+  arrange(Competition, Country, FirstName, LastName, Apparatus)
+
+
+women_vt_qual <- women_vt_qual |> 
+  mutate(
+    Apparatus = case_when(
+      Apparatus == "VT1" &
+      lead(Apparatus) %in% c("VT", "VT1") ~ "VT",
+      TRUE ~ Apparatus
+    )
+  )
+
+women_vt_qual_just_allaround <- women_vt_qual |> 
+  filter(Apparatus %in% c("VT"))
+
+women_vt_qual_app_allaround <- women_vt_qual |> 
+  filter(Apparatus %in% c("VT1","VT2"))
+
+
+
+
+
+  
+
+
+
 
 
 
@@ -82,7 +222,17 @@ unique(men$Round)
 men_by_player <- men |> 
   arrange(Competition, Country, Apparatus, LastName, FirstName, )
 
+women_qual <- women |> 
+  filter(Round == "qual") 
 
+women_apparatus_final <- women |> 
+  filter(Round == "final")
+
+women_team_final <- women |> 
+  filter(Round == "TeamFinal")
+
+women_all_around_final <- women |> 
+  filter(Round == "AAfinal")
 
 
 # Women -------------------------------------------------------------------
@@ -102,4 +252,23 @@ write.csv(women, "women_2022_2023.csv")
 
 
 ?write.csv
+
+
+
+# Regression --------------------------------------------------------------
+
+unique(men_qual$Apparatus)
+
+men_qual_hb <- men_qual |> 
+  filter(Apparatus == "HB")
+
+ggplot(men_qual_hb, aes(x = Rank, y = Score)) +
+  geom_point() +
+  scale_x_log10()
+
+men_qual_hb_line <- lm(Score ~ D_Score + E_Score ,data = men_qual_hb)  
+
+plot(men_qual_hb_line)  
+  
+#   
 
